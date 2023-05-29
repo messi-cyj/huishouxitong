@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lk.modules.mapper.NoticeMapper">
+
+<select id="selectListInfo" resultType="com.lk.modules.entity.Notice">
+select `n`.*,u.real_name from `notice` n   left join `user` u on n.user_id = u.id
+   where 1=1
+    <if test="title !=null">
+        and  n.title like concat('%',#{title},'%')
+    </if>
+    <if test="userId !=null">
+        and n.user_id = #{userId}
+    </if>
+    <if test="type !=null">
+        and n.type = #{type}
+    </if>
+    <if test="realName !=null">
+        and u.real_name like concat('%',#{realName},'%')
+    </if>
+        </select>
+
+</mapper>

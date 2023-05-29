@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lk.modules.mapper.EduMonthMapper">
+    <resultMap id="getMonthEduInfo" type="com.lk.modules.po.EduMonthPo">
+        <id column="id" property="id"/>
+        <collection property="fileList"
+                    ofType="com.lk.modules.po.FilePo"
+                    select="getMonthEduLinkFile"
+                    column="id"/>
+    </resultMap>
+    <insert id="saveMonthEdu" useGeneratedKeys="true" keyProperty="id">
+        insert into t_train_month(topic, trainDate, year, month)
+        values (#{topic}, #{trainDate}, #{year}, #{month})
+    </insert>
+
+    <insert id="saveMonthEduFileLink">
+        insert into t_train_month_file_link(trainId,fileId)
+        VALUE
+        <foreach collection="fileIdList" item="fileId" separator=",">
+            (#{trainId},#{fileId})
+        </foreach>
+    </insert>
+
+    <update id="updateMonthEdu">
+        update t_train_month
+        <set>
+            topic = #{topic},
+            trainDate = #{trainDate},
+            year = #{year},
+            month = #{month},
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMonthFileLink">
+        delete
+        from t_train_month_file_link
+        where trainId = #{id}
+    </delete>
+
+    <update id="deleteMonthEdu">
+        update t_train_month
+        set trainDelete = 1
+        where id = #{id}
+    </update>
+
+    <select id="getMonthEduList" resultType="com.lk.modules.po.EduMonthPo">
+        select *
+        from t_train_month
+        where trainDelete = 0
+        <if test="topic != null and topic != ''">
+            and topic like CONCAT('%',#{topic},'%')
+        </if>
+        <if test="trainDate != null and trainDate != ''">
+            and trainDate like CONCAT(#{trainDate},'%')
+        </if>
+        <if test="year != null and year != ''">
+            and year = #{year}
+        </if>
+        <if test="month != null and month != 0">
+            and month = #{month}
+        </if>
+    </select>
+
+    <select id="getMonthEduDetails" resultMap="getMonthEduInfo">
+        select *
+        from t_train_month
+        where trainDelete = 0
+          and id = #{id}
+    </select>
+
+    <select id="getMonthEduLinkFile" resultType="com.lk.modules.po.EduMonthPo">
+        select ta.*
+        from t_file ta
+                 left join t_train_month_file_link tb
+                           on ta.id = tb.fileId
+        where tb.trainId = #{id}
+    </select>
+</mapper>

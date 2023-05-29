@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lk.modules.mapper.StaffMapper">
+    <insert id="saveStaff">
+        insert into t_staff(roleId, name, sex, phone, address, email, contact)
+        values (#{roleId}, #{name}, #{sex}, #{phone}, #{address}, #{email}, #{contact})
+    </insert>
+
+    <update id="updateStaff">
+        update t_staff
+        <set>
+            roleId = #{roleId},
+            name = #{name},
+            sex = #{sex},
+            phone = #{phone},
+            address = #{address},
+            email = #{email},
+            contact = #{contact},
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStaff">
+        delete
+        from t_staff
+        where id = #{id}
+    </delete>
+
+    <select id="getStaffList" resultType="com.lk.modules.po.StaffPo">
+        select *
+        from t_staff
+    </select>
+
+    <select id="getStaffDetails" resultType="com.lk.modules.po.StaffPo">
+        select *
+        from t_staff
+        where id = #{id}
+    </select>
+</mapper>

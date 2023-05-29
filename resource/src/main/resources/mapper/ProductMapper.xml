@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lk.modules.mapper.ProductMapper">
+
+<select id="selectListInfo" resultType="com.lk.modules.entity.Product">
+select `p`.*,ss.sort_name, u.real_name, us.real_name as employee_name, s.store_name from `product` p   left join `sort` ss on p.sort_id = ss.id
+   left join `user` u on p.user_id = u.id
+   left join `user` us on p.employee_id = us.id
+   left join `store` s on p.store_id = s.id
+   where 1=1
+    <if test="productName !=null">
+        and  p.product__name like concat('%',#{productName},'%')
+    </if>
+    <if test="sortId !=null">
+        and p.sort_id = #{sortId}
+    </if>
+    <if test="userId !=null">
+        and p.user_id = #{userId}
+    </if>
+    <if test="employeeId !=null">
+        and p.employee_id = #{employeeId}
+    </if>
+    <if test="status !=null">
+        and p.status = #{status}
+    </if>
+    <if test="sortName !=null">
+        and ss.sort_name like concat('%',#{sortName},'%')
+    </if>
+            <if test="realName !=null">
+        and u.real_name like concat('%',#{realName},'%')
+    </if>
+                <if test="storeName !=null">
+        and s.store_name like concat('%',#{storeName},'%')
+    </if>
+        </select>
+
+</mapper>

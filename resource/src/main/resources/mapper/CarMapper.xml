@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lk.modules.mapper.CarMapper">
+    <insert id="saveCar">
+        insert into t_car(carNo, licensePlateColor, carStatus, carType, manageScope, totalMass, checkWeight)
+        values (#{carNo}, #{licensePlateColor}, #{carStatus}, #{carType}, #{manageScope}, #{totalMass}, #{checkWeight})
+    </insert>
+
+    <update id="updateCar">
+        update t_car
+        <set>
+            carNo = #{carNo},
+            licensePlateColor = #{licensePlateColor},
+            carStatus = #{carStatus},
+            carType = #{carType},
+            manageScope = #{manageScope},
+            totalMass = #{totalMass},
+            checkWeight = #{checkWeight},
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCar">
+        delete
+        from t_car
+        where id = #{id}
+    </delete>
+
+    <select id="getCarList" resultType="com.lk.modules.po.CarPo">
+        select *
+        from t_car
+        where carDelete = false
+    </select>
+
+    <select id="getCarDetails" resultType="com.lk.modules.po.CarPo">
+        select *
+        from t_car
+        where carDelete = false
+          and id = #{id}
+    </select>
+</mapper>
