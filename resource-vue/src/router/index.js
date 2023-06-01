@@ -59,7 +59,26 @@ const router = new Router({
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/Dictionary'),
                     meta: { title: '字典管理' }
                 },
-
+                {
+                    path: '/bus',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/Bus'),
+                    meta: { title: '车辆管理' }
+                },
+                {
+                    path: '/bus/bus-details',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/BusDetails'),
+                    meta: { title: '车辆详情' }
+                },
+                {
+                    path: '/member',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/Member'),
+                    meta: { title: '员工管理' }
+                },
+                {
+                    path: '/member/member-details',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/MemberDetails'),
+                    meta: { title: '员工详情' }
+                },
 
 
                 {

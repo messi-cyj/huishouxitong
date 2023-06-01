@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "npm run serve",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "dev_t": "set NODE_OPTIONS=\"--openssl-legacy-provider\" & npm run dev\n"
   },
   "dependencies": {
     "axios": "^0.18.0",

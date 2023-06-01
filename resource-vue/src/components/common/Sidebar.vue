@@ -86,9 +86,25 @@ export default {
                             {
                                 "id":9,
                                 "pid":4,
+                                "icon":"el-icon-s-home",
+                                "index":"bus",
+                                "title":"车辆管理",
+                                "subs":null
+                            },
+                            {
+                                "id":9,
+                                "pid":4,
                                 "icon":"el-icon-s-cooperation",
                                 "index":"life",
                                 "title":"生活服务",
+                                "subs":null
+                            },
+                            {
+                                "id":9,
+                                "pid":4,
+                                "icon":"el-icon-s-home",
+                                "index":"member",
+                                "title":"员工管理",
                                 "subs":null
                             },
                             {
