@@ -19,7 +19,7 @@ public interface EduQuarterMapper {
 
     void deleteQuarterFileLink(@Param("id") Integer id);
 
-    Boolean deleteQuarterEdu(Integer id);
+    Boolean deleteQuarterEdu(@Param("id") Integer id);
 
     List<EduQuarterPo> getQuarterEduList(EduQuarterSearchArgs args);
 

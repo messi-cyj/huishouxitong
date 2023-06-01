@@ -19,7 +19,7 @@ public interface EduYearMapper {
 
     void deleteYearFileLink(@Param("id") Integer id);
 
-    Boolean deleteYearEdu(Integer id);
+    Boolean deleteYearEdu(@Param("id") Integer id);
 
     List<EduYearPo> getYearEduList(EduYearSearchArgs args);
 

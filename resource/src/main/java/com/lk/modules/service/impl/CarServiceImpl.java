@@ -2,6 +2,7 @@ package com.lk.modules.service.impl;
 
 import com.lk.modules.args.CarSearchArgs;
 import com.lk.modules.dto.CarDto;
+import com.lk.modules.exception.CommonException;
 import com.lk.modules.mapper.CarMapper;
 import com.lk.modules.po.CarPo;
 import com.lk.modules.service.CarService;
@@ -17,6 +18,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Boolean saveCar(CarDto dto) {
+        Integer code = carMapper.getCarNoWhether(dto.getCarNo());
+        if(code != 0){
+            throw new CommonException("当前车牌已存在，请勿重复添加");
+        }
         return carMapper.saveCar(dto);
     }
 

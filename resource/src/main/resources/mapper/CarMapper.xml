@@ -29,7 +29,19 @@
     <select id="getCarList" resultType="com.lk.modules.po.CarPo">
         select *
         from t_car
-        where carDelete = false
+        where carDelete = 0
+        <if test="carNo != null and carNo != ''">
+            and carNo like CONCAT('%',#{carNo},'%')
+        </if>
+        <if test="licensePlateColor != null and licensePlateColor != ''">
+            and licensePlateColor like CONCAT('%',#{licensePlateColor},'%')
+        </if>
+        <if test="carType != null and carType != ''">
+            and carType like CONCAT('%',#{carType},'%')
+        </if>
+        <if test="carStatus != null">
+            and carStatus = #{carStatus}
+        </if>
     </select>
 
     <select id="getCarDetails" resultType="com.lk.modules.po.CarPo">
@@ -37,5 +49,11 @@
         from t_car
         where carDelete = false
           and id = #{id}
+    </select>
+
+    <select id="getCarNoWhether" resultType="java.lang.Integer">
+        select count(*)
+        from t_car
+        where carNo = #{carNo}
     </select>
 </mapper>

@@ -24,6 +24,15 @@
         delete
         from t_staff
         where id = #{id}
+        <if test="name != null and name != ''">
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="phone != null and phone != ''">
+            and phone like CONCAT('%',#{phone},'%')
+        </if>
+        <if test="address != null and address != ''">
+            and address like CONCAT('%',#{address},'%')
+        </if>
     </delete>
 
     <select id="getStaffList" resultType="com.lk.modules.po.StaffPo">

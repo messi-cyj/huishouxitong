@@ -19,7 +19,7 @@ public interface EduMonthMapper {
 
     void deleteMonthFileLink(@Param("id") Integer id);
 
-    Boolean deleteMonthEdu(Integer id);
+    Boolean deleteMonthEdu(@Param("id") Integer id);
 
     List<EduMonthPo> getMonthEduList(EduMonthSearchArgs args);
 
